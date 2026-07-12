@@ -29,18 +29,26 @@ export default function EmailsPage() {
           {/* EMAIL 1 */}
           <div className={s.emailCard}>
             <div className={s.emailMeta}>
-              <span className={s.emailStep}>EMAIL 1 · SENT INSTANTLY</span>
+              <span className={s.emailStep}>EMAIL 1 · OUTREACH / INTRO</span>
               <div className={s.emailField}><span className={s.emailFieldKey}>From</span><span className={s.emailFieldVal}>AdLift Research &lt;research@adlift.com&gt;</span></div>
-              <div className={s.emailField}><span className={s.emailFieldKey}>Subject</span><span className={s.emailSubject}>Your copy of &ldquo;Who&apos;s Winning in AI Search?&rdquo; 📊</span></div>
-              <div className={s.emailField}><span className={s.emailFieldKey}>Preview</span><span className={s.emailFieldVal}>The full report is attached below — plus the one stat to read first.</span></div>
+              <div className={s.emailField}><span className={s.emailFieldKey}>Subject</span><span className={s.emailSubject}>Is AI recommending {'{{Brand Name}}'} — accurately?</span></div>
+              <div className={s.emailField}><span className={s.emailFieldKey}>Preview</span><span className={s.emailFieldVal}>New research on how ChatGPT, Claude &amp; Gemini see your brand.</span></div>
             </div>
             <div className={s.emailBody}>
-              <p>Hi {'{{firstName}}'},</p>
-              <p>Thanks for grabbing the research. Here&apos;s your copy of <strong>Who&apos;s Winning in AI Search?</strong> — our analysis of 1,530+ prompts across ChatGPT, Gemini, and Perplexity.</p>
-              <p><a className={s.emailBtn} href="#">Download the report →</a></p>
-              <p>If you only read one number first, make it this one: <strong>90.4% brand overlap</strong> across platforms. The same brands keep surfacing — which means visibility in AI search is structural, not random. Page 4 breaks down why.</p>
-              <p className={s.emailSign}>— The AdLift Research Team</p>
-              <div className={s.emailNote}>Goal: deliver instantly, set the hook (one stat), zero ask.</div>
+              <p>Hi {'{{First Name}}'},</p>
+              <p>When prospects use ChatGPT or Google Gemini to find the &ldquo;top fintech brands in India,&rdquo; does <strong>{'{{Brand Name}}'}</strong> come to mind?</p>
+              <p>Even if it does, is the AI providing the correct representation of your value proposition? Is it showing your pricing? Is it showing your features?</p>
+              <p>Traditional search is changing. Buyers are moving toward Large Language Models (LLMs) to research vendors. However, how these AI engines see and recommend brands is an enigma to most marketing leaders.</p>
+              <p>To address this, our team has conducted a large-scale data study on <strong>LLM Brand Consistency</strong>. Here&apos;s a glimpse of our findings:</p>
+              <p>
+                • Understanding why traditional SEO is no longer sufficient.<br />
+                • Learning how ChatGPT, Claude, and Gemini search — and the science behind AI brand recommendations.<br />
+                • Learning how to protect your digital footprint and ensure your brand is visible, trusted, and accurately represented by AI.
+              </p>
+              <p>You can access the full research paper here:</p>
+              <p><a className={s.emailBtn} href="#">Download the Research Paper →</a></p>
+              <p className={s.emailSign}>Warm regards,<br />The AdLift Team</p>
+              <div className={s.emailNote}>Goal: open with the prospect&apos;s blind spot, tease the study, drive the download.</div>
             </div>
           </div>
 
