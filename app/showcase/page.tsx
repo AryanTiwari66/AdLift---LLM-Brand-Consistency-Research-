@@ -12,7 +12,7 @@ const brief = [
   { key: 'Asset', val: <>The <strong>&ldquo;Who&apos;s Winning in AI Search?&rdquo;</strong> LLM Brand Consistency Research report (2026)</> },
   { key: 'Audience', val: <>CMOs, VPs & Heads of Marketing at mid-to-large brands</> },
   { key: 'Goal', val: <>Generate qualified leads by gating the research behind a form, then nurture them toward a Tesseract conversation</> },
-  { key: 'Deliverables', val: <>A conversion-focused <strong>landing page</strong>, a <strong>4-email nurture sequence</strong>, and a <strong>LinkedIn post series</strong></> },
+  { key: 'Deliverables', val: <>A conversion-focused <strong>landing page</strong>, a <strong>3-email outreach sequence</strong>, and a <strong>LinkedIn launch post</strong></> },
 ];
 
 const approach = [
@@ -34,9 +34,9 @@ const deliverables = [
   {
     icon: '✉️',
     num: '02',
-    tag: '4 EMAILS',
+    tag: '3 EMAILS',
     title: 'Email Sequence',
-    desc: 'A delivery email plus a 3-step nurture flow that adds value, builds trust with proof, and drives the meeting.',
+    desc: 'A 3-email outreach flow that introduces the research, challenges the SEO-is-enough mindset, and drives the download.',
     href: '/emails',
     cta: 'View email sequence',
   },
@@ -53,7 +53,7 @@ const deliverables = [
 
 const stats = [
   { big: '3', small: 'Campaign assets' },
-  { big: '4', small: 'Nurture emails' },
+  { big: '3', small: 'Outreach emails' },
   { big: '1', small: 'LinkedIn post' },
   { big: '1', small: 'Unified narrative' },
 ];
