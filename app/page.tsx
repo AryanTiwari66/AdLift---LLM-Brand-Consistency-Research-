@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import s from './landing.module.css';
 
@@ -12,12 +12,40 @@ type FormData = {
   jobTitle: string;
 };
 
+type ChatMsg = { from: 'bot' | 'user'; text: string };
+
+const QUICK_REPLIES = ['Tell me about the report', 'Talk to the team', 'AI search trends'];
+
+function getBotReply(msg: string): string {
+  const lower = msg.toLowerCase();
+  if (lower.includes('report') || lower.includes('research') || lower.includes('pdf'))
+    return 'The AdLift LLM Brand Consistency Research analyzed 1,530+ prompts across ChatGPT, Gemini, and Perplexity. Fill the form on the right to get the full PDF — it\'s free and arrives instantly in your inbox. 📊';
+  if (lower.includes('team') || lower.includes('contact') || lower.includes('talk'))
+    return 'Our team would love to connect! Fill in the short form and we\'ll reach out within one business day. You can also email hello@adlift.com 📧';
+  if (lower.includes('ai') || lower.includes('search') || lower.includes('brand') || lower.includes('trend'))
+    return 'AI search is reshaping how brands get discovered. Our research found a 90.4% brand overlap coefficient — meaning the same brands surface consistently across platforms. Download the report to see who\'s winning in your industry. 🔍';
+  if (lower.includes('price') || lower.includes('cost') || lower.includes('free'))
+    return 'The research report is completely free! Just fill in your details in the form and we\'ll email you the PDF immediately. No credit card needed. ✅';
+  return 'Great question! Our research uncovered some surprising patterns in AI brand visibility. Download the free report to see the full findings — fill the form and it arrives in your inbox instantly. 📥';
+}
+
 export default function LandingPage() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [chatOpen, setChatOpen] = useState(false);
+  const [chatMessages, setChatMessages] = useState<ChatMsg[]>([
+    { from: 'bot', text: 'Hi! 👋 Ask me about our LLM Brand Consistency Research or anything about AI search visibility.' },
+  ]);
+  const [chatInput, setChatInput] = useState('');
+  const [chatTyping, setChatTyping] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [chatMessages, chatTyping]);
 
   const onSubmit = async (data: FormData) => {
     setLoading(true);
@@ -35,6 +63,18 @@ export default function LandingPage() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const sendChat = (text?: string) => {
+    const msg = (text ?? chatInput).trim();
+    if (!msg) return;
+    setChatMessages(prev => [...prev, { from: 'user', text: msg }]);
+    setChatInput('');
+    setChatTyping(true);
+    setTimeout(() => {
+      setChatTyping(false);
+      setChatMessages(prev => [...prev, { from: 'bot', text: getBotReply(msg) }]);
+    }, 800);
   };
 
   const bullets = [
@@ -77,8 +117,9 @@ export default function LandingPage() {
       <section className={s.hero}>
         <div className={s.heroInner}>
 
-          {/* LEFT COLUMN: copy on top, image below */}
+          {/* LEFT COLUMN */}
           <div className={s.leftCol}>
+
             {/* Copy */}
             <div className={s.copyBlock}>
               <div className={s.badge}>
@@ -128,31 +169,59 @@ export default function LandingPage() {
                 <div className={s.coverSubText}>Top Websites Visible in AI Search Across Industries</div>
               </div>
             </div>
+
+            {/* Client Testimonial */}
+            <div className={s.testimonialSection}>
+              <div className={s.testimonialLabel}>CLIENT SPEAK</div>
+              <div className={s.testimonialCard}>
+                <div className={s.testimonialQuoteMark}>&ldquo;</div>
+                <p className={s.testimonialText}>
+                  We&apos;ve seen a huge improvement in our SEO since working with AdLift. The biggest impact was following the roadmap they created — within the first four months, SEO traffic increased over 50% and has continued to grow month over month beyond that.
+                </p>
+                <div className={s.testimonialPerson}>
+                  <div className={s.testimonialAvatar}>LP</div>
+                  <div className={s.testimonialInfo}>
+                    <div className={s.testimonialName}>Lomit Patel</div>
+                    <div className={s.testimonialRole}>Chief Marketing &amp; Growth Officer</div>
+                    <div className={s.testimonialCompany}>Tynker</div>
+                  </div>
+                  <div className={s.testimonialStars}>★★★★★</div>
+                </div>
+              </div>
+            </div>
+
           </div>
 
-          {/* RIGHT COLUMN: form on top, bullets + stats below */}
+          {/* RIGHT COLUMN */}
           <div className={s.rightCol}>
+
             {/* Form */}
             <div className={s.formBox} id="form">
+              <div className={s.formTopAccent} />
+              <div className={s.formBadge}>100% FREE · INSTANT DELIVERY</div>
               {submitted ? (
                 <div className={s.success}>
                   <div className={s.successCheck}>✓</div>
-                  <h3 className={s.successTitle}>Your copy is on its way</h3>
+                  <h3 className={s.successTitle}>Your copy is on its way!</h3>
                   <p className={s.successBody}>Check your inbox — the PDF will arrive in a few minutes.</p>
                 </div>
               ) : (
                 <>
-                  <h2 className={s.formTitle}>Download the paper</h2>
+                  <h2 className={s.formTitle}>Get the Full Research Report</h2>
+                  <p className={s.formSubtitle}>Find out which brands AI recommends — and what they&apos;re doing differently.</p>
                   <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
-                    <input type="text" placeholder="FIRST NAME*" className={`${s.input} ${errors.firstName ? s.inputErr : ''}`} {...register('firstName', { required: true })} />
-                    <input type="text" placeholder="LAST NAME*" className={`${s.input} ${errors.lastName ? s.inputErr : ''}`} {...register('lastName', { required: true })} />
-                    <input type="email" placeholder="YOUR EMAIL*" className={`${s.input} ${errors.email ? s.inputErr : ''}`} {...register('email', { required: true, pattern: /^\S+@\S+\.\S+$/ })} />
-                    <input type="text" placeholder="COMPANY*" className={`${s.input} ${errors.company ? s.inputErr : ''}`} {...register('company', { required: true })} />
+                    <div className={s.inputRow}>
+                      <input type="text" placeholder="FIRST NAME*" className={`${s.input} ${errors.firstName ? s.inputErr : ''}`} {...register('firstName', { required: true })} />
+                      <input type="text" placeholder="LAST NAME*" className={`${s.input} ${errors.lastName ? s.inputErr : ''}`} {...register('lastName', { required: true })} />
+                    </div>
+                    <input type="email" placeholder="WORK EMAIL*" className={`${s.input} ${errors.email ? s.inputErr : ''}`} {...register('email', { required: true, pattern: /^\S+@\S+\.\S+$/ })} />
+                    <input type="text" placeholder="COMPANY NAME*" className={`${s.input} ${errors.company ? s.inputErr : ''}`} {...register('company', { required: true })} />
                     <input type="text" placeholder="JOB TITLE*" className={`${s.input} ${errors.jobTitle ? s.inputErr : ''}`} {...register('jobTitle', { required: true })} />
                     <button type="submit" className={s.submitBtn} disabled={loading}>
-                      {loading ? 'SENDING...' : 'GET IT NOW'}
+                      {loading ? 'SENDING...' : 'GET THE FREE REPORT →'}
                     </button>
                     {error && <p className={s.errMsg}>{error}</p>}
+                    <p className={s.formDisclaimer}>🔒 No spam. Unsubscribe anytime. Your data is safe with us.</p>
                   </form>
                 </>
               )}
@@ -178,8 +247,8 @@ export default function LandingPage() {
                 ))}
               </div>
             </div>
-          </div>
 
+          </div>
         </div>
       </section>
 
@@ -195,6 +264,59 @@ export default function LandingPage() {
           <span className={s.footerCopy}>© 2026 AdLift. All rights reserved.</span>
         </div>
       </footer>
+
+      {/* CHATBOT WIDGET */}
+      <div className={s.chatWidget}>
+        {chatOpen && (
+          <div className={s.chatPanel}>
+            <div className={s.chatHeader}>
+              <div className={s.chatHeaderInfo}>
+                <div className={s.chatBotAvatar}>AL</div>
+                <div>
+                  <div className={s.chatBotName}>AdLift Assistant</div>
+                  <div className={s.chatBotStatus}><span className={s.chatOnlineDot} />Online</div>
+                </div>
+              </div>
+              <button className={s.chatClose} onClick={() => setChatOpen(false)}>✕</button>
+            </div>
+            <div className={s.chatMessages}>
+              {chatMessages.map((msg, i) => (
+                <div key={i} className={msg.from === 'bot' ? s.chatMsgBot : s.chatMsgUser}>
+                  {msg.text}
+                </div>
+              ))}
+              {chatTyping && (
+                <div className={s.chatMsgBot}>
+                  <span className={s.chatTypingDots}><span /><span /><span /></span>
+                </div>
+              )}
+              <div ref={messagesEndRef} />
+            </div>
+            <div className={s.chatQuickReplies}>
+              {QUICK_REPLIES.map(r => (
+                <button key={r} className={s.chatQuickBtn} onClick={() => sendChat(r)}>{r}</button>
+              ))}
+            </div>
+            <div className={s.chatInputRow}>
+              <input
+                className={s.chatInputField}
+                placeholder="Ask anything..."
+                value={chatInput}
+                onChange={e => setChatInput(e.target.value)}
+                onKeyDown={e => e.key === 'Enter' && sendChat()}
+              />
+              <button className={s.chatSendBtn} onClick={() => sendChat()}>→</button>
+            </div>
+          </div>
+        )}
+        <button className={s.chatBubble} onClick={() => setChatOpen(o => !o)}>
+          {chatOpen ? (
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          ) : (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          )}
+        </button>
+      </div>
     </>
   );
 }
