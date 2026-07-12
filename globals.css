@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* AdLift brand colors */
+  --al-navy:       #1A3C6E;
+  --al-navy-dark:  #122B52;
+  --al-navy-light: #2A5BA8;
+  --al-orange:     #F58220;
+  --al-orange-dark:#D96E12;
+  --al-orange-bg:  #FEF3E7;
+
+  /* Neutral */
+  --al-white:   #FFFFFF;
+  --al-bg:      #F8F9FB;
+  --al-border:  #E2E8F0;
+  --al-gray-50: #F8FAFC;
+  --al-gray-100:#F1F5F9;
+  --al-gray-300:#CBD5E1;
+  --al-gray-500:#64748B;
+  --al-gray-700:#334155;
+  --al-gray-900:#0F172A;
+
+  /* Typography */
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  background: var(--al-white);
+  color: var(--al-gray-900);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
