@@ -29,10 +29,28 @@ function getBotReply(msg: string): string {
   return 'Great question! Our research uncovered some surprising patterns in AI brand visibility. Download the free report to see the full findings — fill the form and it arrives in your inbox instantly. 📥';
 }
 
+const TESTIMONIALS = [
+  {
+    name: 'Lomit Patel',
+    company: 'Tynker',
+    role: 'Chief Marketing and Growth Officer',
+    quote: 'We\'ve seen a huge improvement in our SEO since working with AdLift, the biggest impact we\'ve seen is by following the road map and the plan that they\'ve come up with within the first four months, SEO traffic increased over 50% and it\'s continued to increase month, over month beyond that',
+    photo: 'https://i.pravatar.cc/500?img=12',
+  },
+  {
+    name: 'Kunal Shah',
+    company: 'Vidyard',
+    role: 'VP of Marketing',
+    quote: 'AdLift has become a true extension of our team. Their data-driven approach to AI search visibility gave us a competitive edge we didn\'t know was possible. The results speak for themselves — our brand now shows up consistently across every major AI platform.',
+    photo: 'https://i.pravatar.cc/500?img=15',
+  },
+];
+
 export default function LandingPage() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [testimonialIdx, setTestimonialIdx] = useState(0);
   const [chatOpen, setChatOpen] = useState(false);
   const [chatMessages, setChatMessages] = useState<ChatMsg[]>([
     { from: 'bot', text: 'Hi! 👋 Ask me about our LLM Brand Consistency Research or anything about AI search visibility.' },
@@ -91,6 +109,14 @@ export default function LandingPage() {
     { num: '6', label: 'Industries' },
   ];
 
+  const trustPoints = [
+    'Based on 1,237 paired observations across 6 industries',
+    'Independent, vendor-neutral methodology',
+    'Actionable playbook — not just data',
+  ];
+
+  const t = TESTIMONIALS[testimonialIdx];
+
   return (
     <>
       {/* NAV */}
@@ -113,141 +139,173 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      {/* HERO */}
+      {/* HERO — 2×2 grid: copy↔form align, image↔inside align */}
       <section className={s.hero}>
-        <div className={s.heroInner}>
+        <div className={s.heroGrid}>
 
-          {/* LEFT COLUMN */}
-          <div className={s.leftCol}>
-
-            {/* Copy */}
-            <div className={s.copyBlock}>
-              <div className={s.badge}>
-                <span className={s.badgeDot} />
-                2026 RESEARCH REPORT
-              </div>
-              <h1 className={s.h1}>
-                Who&apos;s Winning<br />
-                in <span className={s.h1Orange}>AI Search?</span>
-              </h1>
-              <p className={s.subhead}>
-                We tested ChatGPT, Gemini, and Perplexity to see which brands dominate recommendations. Here&apos;s what actually drives visibility today.
-              </p>
-              <button className={s.scrollBtn} onClick={() => document.getElementById('form')?.scrollIntoView({ behavior: 'smooth' })}>
-                Download the Free Report &nbsp;→
-              </button>
+          {/* R1 C1 — Copy block */}
+          <div className={s.copyBlock}>
+            <div className={s.badge}>
+              <span className={s.badgeDot} />
+              2026 RESEARCH REPORT
             </div>
-
-            {/* Cover image */}
-            <div className={s.coverImage}>
-              <div className={s.coverGradient}>
-                <div className={s.coverBrain}>
-                  <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg" className={s.brainSvg}>
-                    <circle cx="150" cy="150" r="140" fill="url(#bg)" opacity="0.3"/>
-                    <circle cx="150" cy="120" r="70" fill="none" stroke="rgba(180,120,255,0.6)" strokeWidth="1.5"/>
-                    <circle cx="150" cy="120" r="50" fill="none" stroke="rgba(180,120,255,0.4)" strokeWidth="1"/>
-                    <circle cx="150" cy="120" r="30" fill="rgba(140,80,255,0.3)"/>
-                    {[[80,80],[220,80],[60,150],[240,150],[100,200],[200,200],[150,60],[110,110],[190,110]].map(([cx,cy],i) => (
-                      <circle key={i} cx={cx} cy={cy} r="4" fill="rgba(200,150,255,0.8)"/>
-                    ))}
-                    <line x1="80" y1="80" x2="150" y2="120" stroke="rgba(180,120,255,0.3)" strokeWidth="1"/>
-                    <line x1="220" y1="80" x2="150" y2="120" stroke="rgba(180,120,255,0.3)" strokeWidth="1"/>
-                    <line x1="60" y1="150" x2="150" y2="120" stroke="rgba(180,120,255,0.3)" strokeWidth="1"/>
-                    <line x1="240" y1="150" x2="150" y2="120" stroke="rgba(180,120,255,0.3)" strokeWidth="1"/>
-                    <line x1="80" y1="80" x2="220" y2="80" stroke="rgba(180,120,255,0.2)" strokeWidth="1"/>
-                    <line x1="60" y1="150" x2="240" y2="150" stroke="rgba(180,120,255,0.2)" strokeWidth="1"/>
-                    <defs>
-                      <radialGradient id="bg" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" stopColor="#9333EA"/>
-                        <stop offset="100%" stopColor="#4C1D95"/>
-                      </radialGradient>
-                    </defs>
-                  </svg>
-                </div>
-                <div className={s.coverLogoText}>AdLi<span>ft</span></div>
-                <div className={s.coverHeading}>WHO&apos;S WINNING<br />IN AI SEARCH:</div>
-                <div className={s.coverSubText}>Top Websites Visible in AI Search Across Industries</div>
-              </div>
-            </div>
-
-            {/* Client Testimonial */}
-            <div className={s.testimonialSection}>
-              <div className={s.testimonialLabel}>CLIENT SPEAK</div>
-              <div className={s.testimonialCard}>
-                <div className={s.testimonialQuoteMark}>&ldquo;</div>
-                <p className={s.testimonialText}>
-                  We&apos;ve seen a huge improvement in our SEO since working with AdLift. The biggest impact was following the roadmap they created — within the first four months, SEO traffic increased over 50% and has continued to grow month over month beyond that.
-                </p>
-                <div className={s.testimonialPerson}>
-                  <div className={s.testimonialAvatar}>LP</div>
-                  <div className={s.testimonialInfo}>
-                    <div className={s.testimonialName}>Lomit Patel</div>
-                    <div className={s.testimonialRole}>Chief Marketing &amp; Growth Officer</div>
-                    <div className={s.testimonialCompany}>Tynker</div>
-                  </div>
-                  <div className={s.testimonialStars}>★★★★★</div>
-                </div>
-              </div>
-            </div>
-
+            <h1 className={s.h1}>
+              Who&apos;s Winning<br />
+              in <span className={s.h1Orange}>AI Search?</span>
+            </h1>
+            <p className={s.subhead}>
+              We tested ChatGPT, Gemini, and Perplexity to see which brands dominate recommendations. Here&apos;s what actually drives visibility in the age of AI-powered discovery.
+            </p>
+            <ul className={s.trustList}>
+              {trustPoints.map((p, i) => (
+                <li key={i} className={s.trustItem}>
+                  <span className={s.trustCheck}>✓</span>
+                  {p}
+                </li>
+              ))}
+            </ul>
+            <button className={s.scrollBtn} onClick={() => document.getElementById('form')?.scrollIntoView({ behavior: 'smooth' })}>
+              Download the Free Report &nbsp;→
+            </button>
           </div>
 
-          {/* RIGHT COLUMN */}
-          <div className={s.rightCol}>
-
-            {/* Form */}
-            <div className={s.formBox} id="form">
-              <div className={s.formTopAccent} />
-              <div className={s.formBadge}>100% FREE · INSTANT DELIVERY</div>
-              {submitted ? (
-                <div className={s.success}>
-                  <div className={s.successCheck}>✓</div>
-                  <h3 className={s.successTitle}>Your copy is on its way!</h3>
-                  <p className={s.successBody}>Check your inbox — the PDF will arrive in a few minutes.</p>
-                </div>
-              ) : (
-                <>
-                  <h2 className={s.formTitle}>Get the Full Research Report</h2>
-                  <p className={s.formSubtitle}>Find out which brands AI recommends — and what they&apos;re doing differently.</p>
-                  <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
-                    <div className={s.inputRow}>
-                      <input type="text" placeholder="FIRST NAME*" className={`${s.input} ${errors.firstName ? s.inputErr : ''}`} {...register('firstName', { required: true })} />
-                      <input type="text" placeholder="LAST NAME*" className={`${s.input} ${errors.lastName ? s.inputErr : ''}`} {...register('lastName', { required: true })} />
-                    </div>
-                    <input type="email" placeholder="WORK EMAIL*" className={`${s.input} ${errors.email ? s.inputErr : ''}`} {...register('email', { required: true, pattern: /^\S+@\S+\.\S+$/ })} />
-                    <input type="text" placeholder="COMPANY NAME*" className={`${s.input} ${errors.company ? s.inputErr : ''}`} {...register('company', { required: true })} />
-                    <input type="text" placeholder="JOB TITLE*" className={`${s.input} ${errors.jobTitle ? s.inputErr : ''}`} {...register('jobTitle', { required: true })} />
-                    <button type="submit" className={s.submitBtn} disabled={loading}>
-                      {loading ? 'SENDING...' : 'GET THE FREE REPORT →'}
-                    </button>
-                    {error && <p className={s.errMsg}>{error}</p>}
-                    <p className={s.formDisclaimer}>🔒 No spam. Unsubscribe anytime. Your data is safe with us.</p>
-                  </form>
-                </>
-              )}
-            </div>
-
-            {/* What's inside */}
-            <div className={s.insideBox}>
-              <div className={s.insideTitle}>What&apos;s inside</div>
-              <ul className={s.bullets}>
-                {bullets.map((b, i) => (
-                  <li key={i} className={s.bullet}>
-                    <span className={s.bulletIcon}>{b.icon}</span>
-                    <span>{b.text}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className={s.statsRow}>
-                {stats.map(st => (
-                  <div key={st.num} className={s.statItem}>
-                    <span className={s.statNum}>{st.num}</span>
-                    <span className={s.statLabel}>{st.label}</span>
+          {/* R1 C2 — Form */}
+          <div className={s.formBox} id="form">
+            <div className={s.formTopAccent} />
+            <div className={s.formBadge}>100% FREE · INSTANT DELIVERY</div>
+            {submitted ? (
+              <div className={s.success}>
+                <div className={s.successCheck}>✓</div>
+                <h3 className={s.successTitle}>Your copy is on its way!</h3>
+                <p className={s.successBody}>Check your inbox — the PDF will arrive in a few minutes.</p>
+              </div>
+            ) : (
+              <>
+                <h2 className={s.formTitle}>Get the Full Research Report</h2>
+                <p className={s.formSubtitle}>Find out which brands AI recommends — and what they&apos;re doing differently.</p>
+                <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
+                  <div className={s.inputRow}>
+                    <input type="text" placeholder="FIRST NAME*" className={`${s.input} ${errors.firstName ? s.inputErr : ''}`} {...register('firstName', { required: true })} />
+                    <input type="text" placeholder="LAST NAME*" className={`${s.input} ${errors.lastName ? s.inputErr : ''}`} {...register('lastName', { required: true })} />
                   </div>
-                ))}
+                  <input type="email" placeholder="WORK EMAIL*" className={`${s.input} ${errors.email ? s.inputErr : ''}`} {...register('email', { required: true, pattern: /^\S+@\S+\.\S+$/ })} />
+                  <input type="text" placeholder="COMPANY NAME*" className={`${s.input} ${errors.company ? s.inputErr : ''}`} {...register('company', { required: true })} />
+                  <input type="text" placeholder="JOB TITLE*" className={`${s.input} ${errors.jobTitle ? s.inputErr : ''}`} {...register('jobTitle', { required: true })} />
+                  <button type="submit" className={s.submitBtn} disabled={loading}>
+                    {loading ? 'SENDING...' : 'GET THE FREE REPORT →'}
+                  </button>
+                  {error && <p className={s.errMsg}>{error}</p>}
+                  <p className={s.formDisclaimer}>🔒 No spam. Unsubscribe anytime. Your data is safe with us.</p>
+                </form>
+              </>
+            )}
+          </div>
+
+          {/* R2 C1 — Cover image */}
+          <div className={s.coverImage}>
+            <div className={s.coverGradient}>
+              <div className={s.coverBrain}>
+                <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg" className={s.brainSvg}>
+                  <circle cx="150" cy="150" r="140" fill="url(#bg)" opacity="0.3"/>
+                  <circle cx="150" cy="120" r="70" fill="none" stroke="rgba(180,120,255,0.6)" strokeWidth="1.5"/>
+                  <circle cx="150" cy="120" r="50" fill="none" stroke="rgba(180,120,255,0.4)" strokeWidth="1"/>
+                  <circle cx="150" cy="120" r="30" fill="rgba(140,80,255,0.3)"/>
+                  {[[80,80],[220,80],[60,150],[240,150],[100,200],[200,200],[150,60],[110,110],[190,110]].map(([cx,cy],i) => (
+                    <circle key={i} cx={cx} cy={cy} r="4" fill="rgba(200,150,255,0.8)"/>
+                  ))}
+                  <line x1="80" y1="80" x2="150" y2="120" stroke="rgba(180,120,255,0.3)" strokeWidth="1"/>
+                  <line x1="220" y1="80" x2="150" y2="120" stroke="rgba(180,120,255,0.3)" strokeWidth="1"/>
+                  <line x1="60" y1="150" x2="150" y2="120" stroke="rgba(180,120,255,0.3)" strokeWidth="1"/>
+                  <line x1="240" y1="150" x2="150" y2="120" stroke="rgba(180,120,255,0.3)" strokeWidth="1"/>
+                  <line x1="80" y1="80" x2="220" y2="80" stroke="rgba(180,120,255,0.2)" strokeWidth="1"/>
+                  <line x1="60" y1="150" x2="240" y2="150" stroke="rgba(180,120,255,0.2)" strokeWidth="1"/>
+                  <defs>
+                    <radialGradient id="bg" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stopColor="#9333EA"/>
+                      <stop offset="100%" stopColor="#4C1D95"/>
+                    </radialGradient>
+                  </defs>
+                </svg>
+              </div>
+              <div className={s.coverLogoText}>AdLi<span>ft</span></div>
+              <div className={s.coverHeading}>WHO&apos;S WINNING<br />IN AI SEARCH:</div>
+              <div className={s.coverSubText}>Top Websites Visible in AI Search Across Industries</div>
+            </div>
+          </div>
+
+          {/* R2 C2 — What's inside */}
+          <div className={s.insideBox}>
+            <div className={s.insideTitle}>What&apos;s inside</div>
+            <ul className={s.bullets}>
+              {bullets.map((b, i) => (
+                <li key={i} className={s.bullet}>
+                  <span className={s.bulletIcon}>{b.icon}</span>
+                  <span>{b.text}</span>
+                </li>
+              ))}
+            </ul>
+            <div className={s.statsRow}>
+              {stats.map(st => (
+                <div key={st.num} className={s.statItem}>
+                  <span className={s.statNum}>{st.num}</span>
+                  <span className={s.statLabel}>{st.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* CLIENT SPEAK */}
+      <section className={s.clientSection}>
+        <div className={s.clientInner}>
+          <h2 className={s.clientHeading}>Client Speak</h2>
+          <div className={s.testimonialRow}>
+            <button
+              className={s.arrowBtn}
+              onClick={() => setTestimonialIdx(i => (i - 1 + TESTIMONIALS.length) % TESTIMONIALS.length)}
+              aria-label="Previous testimonial"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            </button>
+
+            <div className={s.tCard}>
+              <div className={s.tContent}>
+                <h3 className={s.tName}>{t.name}</h3>
+                <div className={s.tCompany}>{t.company}</div>
+                <div className={s.tRole}>{t.role}</div>
+                <p className={s.tQuote}>
+                  <span className={s.tQuoteMark}>&#10077;</span>
+                  {t.quote}
+                </p>
+              </div>
+              <div className={s.tPhotoWrap}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={t.photo} alt={t.name} className={s.tPhoto} />
+                <button className={s.tPlayBtn} aria-label="Play video testimonial">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+                </button>
               </div>
             </div>
 
+            <button
+              className={s.arrowBtn}
+              onClick={() => setTestimonialIdx(i => (i + 1) % TESTIMONIALS.length)}
+              aria-label="Next testimonial"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+          <div className={s.tDots}>
+            {TESTIMONIALS.map((_, i) => (
+              <button
+                key={i}
+                className={`${s.tDot} ${i === testimonialIdx ? s.tDotActive : ''}`}
+                onClick={() => setTestimonialIdx(i)}
+                aria-label={`Go to testimonial ${i + 1}`}
+              />
+            ))}
           </div>
         </div>
       </section>
