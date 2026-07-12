@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
-  const { firstName, email, company, jobTitle } = await req.json();
+  const { firstName, lastName, email, company, jobTitle } = await req.json();
 
   if (!firstName || !email || !company || !jobTitle) {
     return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
             <span style="font-size:24px;font-weight:700;color:#fff;">Ad<span style="color:#F58220;">Lift</span></span>
           </div>
           <div style="background:#fff;padding:40px;border:1px solid #E2E8F0;border-top:none;border-radius:0 0 12px 12px;">
-            <h1 style="font-size:22px;font-weight:700;color:#1A3C6E;margin-bottom:16px;">Hi ${firstName}, your research is ready.</h1>
+            <h1 style="font-size:22px;font-weight:700;color:#1A3C6E;margin-bottom:16px;">Hi ${firstName}${lastName ? ' ' + lastName : ''}, your research is ready.</h1>
             <p style="font-size:15px;line-height:1.7;color:#475569;margin-bottom:24px;">
               Thank you for downloading the AdLift LLM Brand Consistency Research. You'll find the full PDF at the link below.
             </p>
