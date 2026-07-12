@@ -37,6 +37,20 @@ export default function LandingPage() {
     }
   };
 
+  const bullets = [
+    { icon: '📊', text: 'Which brands AI recommends in your category — and why' },
+    { icon: '🔍', text: 'Platform breakdown: ChatGPT vs Gemini vs Perplexity' },
+    { icon: '🏭', text: 'Sector analysis: Insurance, Healthcare, E-Commerce, Travel, SaaS' },
+    { icon: '⚡', text: 'The 3 structural factors that actually drive AI visibility' },
+  ];
+
+  const stats = [
+    { num: '1,530+', label: 'Prompts run' },
+    { num: '90.4%', label: 'Avg brand overlap' },
+    { num: '3', label: 'AI platforms' },
+    { num: '6', label: 'Industries' },
+  ];
+
   return (
     <>
       {/* NAV */}
@@ -63,28 +77,42 @@ export default function LandingPage() {
       <section className={s.hero}>
         <div className={s.heroInner}>
 
-          {/* LEFT: IMAGE */}
-          <div className={s.heroLeft}>
+          {/* LEFT COLUMN: copy on top, image below */}
+          <div className={s.leftCol}>
+            {/* Copy */}
+            <div className={s.copyBlock}>
+              <div className={s.badge}>
+                <span className={s.badgeDot} />
+                2026 RESEARCH REPORT
+              </div>
+              <h1 className={s.h1}>
+                Who&apos;s Winning<br />
+                in <span className={s.h1Orange}>AI Search?</span>
+              </h1>
+              <p className={s.subhead}>
+                We tested ChatGPT, Gemini, and Perplexity to see which brands dominate recommendations. Here&apos;s what actually drives visibility today.
+              </p>
+              <button className={s.scrollBtn} onClick={() => document.getElementById('form')?.scrollIntoView({ behavior: 'smooth' })}>
+                Download the Free Report &nbsp;→
+              </button>
+            </div>
+
+            {/* Cover image */}
             <div className={s.coverImage}>
               <div className={s.coverGradient}>
                 <div className={s.coverBrain}>
-                  {/* Abstract brain/network SVG */}
                   <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg" className={s.brainSvg}>
                     <circle cx="150" cy="150" r="140" fill="url(#bg)" opacity="0.3"/>
                     <circle cx="150" cy="120" r="70" fill="none" stroke="rgba(180,120,255,0.6)" strokeWidth="1.5"/>
                     <circle cx="150" cy="120" r="50" fill="none" stroke="rgba(180,120,255,0.4)" strokeWidth="1"/>
                     <circle cx="150" cy="120" r="30" fill="rgba(140,80,255,0.3)"/>
-                    {/* Network nodes */}
-                    {[[80,80],[220,80],[60,150],[240,150],[100,200],[200,200],[150,60],[150,240],[110,110],[190,110],[110,130],[190,130]].map(([cx,cy],i) => (
+                    {[[80,80],[220,80],[60,150],[240,150],[100,200],[200,200],[150,60],[110,110],[190,110]].map(([cx,cy],i) => (
                       <circle key={i} cx={cx} cy={cy} r="4" fill="rgba(200,150,255,0.8)"/>
                     ))}
-                    {/* Network lines */}
                     <line x1="80" y1="80" x2="150" y2="120" stroke="rgba(180,120,255,0.3)" strokeWidth="1"/>
                     <line x1="220" y1="80" x2="150" y2="120" stroke="rgba(180,120,255,0.3)" strokeWidth="1"/>
                     <line x1="60" y1="150" x2="150" y2="120" stroke="rgba(180,120,255,0.3)" strokeWidth="1"/>
                     <line x1="240" y1="150" x2="150" y2="120" stroke="rgba(180,120,255,0.3)" strokeWidth="1"/>
-                    <line x1="100" y1="200" x2="150" y2="120" stroke="rgba(180,120,255,0.2)" strokeWidth="1"/>
-                    <line x1="200" y1="200" x2="150" y2="120" stroke="rgba(180,120,255,0.2)" strokeWidth="1"/>
                     <line x1="80" y1="80" x2="220" y2="80" stroke="rgba(180,120,255,0.2)" strokeWidth="1"/>
                     <line x1="60" y1="150" x2="240" y2="150" stroke="rgba(180,120,255,0.2)" strokeWidth="1"/>
                     <defs>
@@ -102,26 +130,15 @@ export default function LandingPage() {
             </div>
           </div>
 
-          {/* RIGHT: COPY + FORM */}
-          <div className={s.heroRight}>
-            <div className={s.badge}>
-              <span className={s.badgeDot} />
-              2026 RESEARCH REPORT
-            </div>
-            <h1 className={s.h1}>
-              Who&apos;s Winning<br />
-              in <span className={s.h1Orange}>AI Search?</span>
-            </h1>
-            <p className={s.subhead}>
-              We tested ChatGPT, Gemini, and Perplexity to see which brands dominate recommendations. Here&apos;s what actually drives visibility today.
-            </p>
-
-            <div className={s.formBox}>
+          {/* RIGHT COLUMN: form on top, bullets + stats below */}
+          <div className={s.rightCol}>
+            {/* Form */}
+            <div className={s.formBox} id="form">
               {submitted ? (
                 <div className={s.success}>
                   <div className={s.successCheck}>✓</div>
                   <h3 className={s.successTitle}>Your copy is on its way</h3>
-                  <p className={s.successBody}>Check your inbox — the PDF will arrive in a few minutes. Check your spam if you don&apos;t see it.</p>
+                  <p className={s.successBody}>Check your inbox — the PDF will arrive in a few minutes.</p>
                 </div>
               ) : (
                 <>
@@ -140,7 +157,29 @@ export default function LandingPage() {
                 </>
               )}
             </div>
+
+            {/* What's inside */}
+            <div className={s.insideBox}>
+              <div className={s.insideTitle}>What&apos;s inside</div>
+              <ul className={s.bullets}>
+                {bullets.map((b, i) => (
+                  <li key={i} className={s.bullet}>
+                    <span className={s.bulletIcon}>{b.icon}</span>
+                    <span>{b.text}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className={s.statsRow}>
+                {stats.map(st => (
+                  <div key={st.num} className={s.statItem}>
+                    <span className={s.statNum}>{st.num}</span>
+                    <span className={s.statLabel}>{st.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
+
         </div>
       </section>
 
