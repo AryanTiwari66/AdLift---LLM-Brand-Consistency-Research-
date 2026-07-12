@@ -51,6 +51,15 @@ const deliverables = [
   },
 ];
 
+const tools = [
+  { icon: '🤖', name: 'Claude Code', use: 'Built and iterated the landing page, showcase, and deliverable pages' },
+  { icon: '🎨', name: 'Claude Design', use: 'Layout direction and visual design decisions' },
+  { icon: '💬', name: 'ChatGPT', use: 'Copywriting drafts and messaging angles' },
+  { icon: '✨', name: 'Gemini', use: 'Research framing and idea validation' },
+  { icon: '✍️', name: 'WriteHuman.ai', use: 'Humanizing and polishing the final copy' },
+  { icon: '⚡', name: 'Replit', use: 'Quick prototyping and environment testing' },
+];
+
 const stats = [
   { big: '3', small: 'Campaign assets' },
   { big: '3', small: 'Outreach emails' },
@@ -126,6 +135,22 @@ export default function Showcase() {
                 <div className={s.deliverDesc}>{d.desc}</div>
                 <div className={s.deliverCta}>{d.cta} <span>→</span></div>
               </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* AI Tools Used */}
+        <div className={s.section}>
+          <div className={s.sectionLabel}>AI Tools Used</div>
+          <div className={s.toolGrid}>
+            {tools.map(t => (
+              <div key={t.name} className={s.toolItem}>
+                <div className={s.toolIcon}>{t.icon}</div>
+                <div>
+                  <div className={s.toolName}>{t.name}</div>
+                  <div className={s.toolUse}>{t.use}</div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
