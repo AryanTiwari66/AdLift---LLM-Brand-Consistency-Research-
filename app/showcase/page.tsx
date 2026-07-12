@@ -43,18 +43,18 @@ const deliverables = [
   {
     icon: '💼',
     num: '03',
-    tag: '3 POSTS',
-    title: 'LinkedIn Posts',
-    desc: 'A launch series written for a marketing-leader feed — a hook post, a data post, and a contrarian take.',
+    tag: 'LINKEDIN',
+    title: 'LinkedIn Post',
+    desc: 'A launch post written for a marketing-leader feed — the campaign creative paired with a tight, CTA-driven caption.',
     href: '/linkedin',
-    cta: 'View LinkedIn posts',
+    cta: 'View LinkedIn post',
   },
 ];
 
 const stats = [
   { big: '3', small: 'Campaign assets' },
   { big: '4', small: 'Nurture emails' },
-  { big: '3', small: 'LinkedIn posts' },
+  { big: '1', small: 'LinkedIn post' },
   { big: '1', small: 'Unified narrative' },
 ];
 
