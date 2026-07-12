@@ -37,20 +37,6 @@ export default function LandingPage() {
     }
   };
 
-  const bullets = [
-    'Find out which brands AI already recommends in your category — and exactly why yours may not be one of them',
-    'Understand the 3 structural factors that drive AI brand visibility: citation depth, content surface area, and third-party validation',
-    'Platform-by-platform breakdown across ChatGPT, Gemini, and Perplexity — with sector-level data across Insurance, Healthcare, E-Commerce, Travel, and SaaS',
-    'Walk away with a clear picture of what actually moves the needle — and a framework you can act on immediately',
-  ];
-
-  const stats = [
-    { num: '1,530+', label: 'Structured prompts run' },
-    { num: '90.4%', label: 'Average brand overlap, logged-in vs. anonymous' },
-    { num: '6', label: 'Industries benchmarked' },
-    { num: '3', label: 'AI platforms tested' },
-  ];
-
   return (
     <>
       {/* NAV */}
@@ -76,37 +62,59 @@ export default function LandingPage() {
       {/* HERO */}
       <section className={s.hero}>
         <div className={s.heroInner}>
-          {/* LEFT */}
-          <div className={s.heroLeft}>
-            <h1 className={s.h1}>
-              Your competitors are already showing up in AI search.<br />
-              <span className={s.h1Orange}>Do you know if you are?</span>
-            </h1>
-            <p className={s.subhead}>
-              AdLift ran 1,530+ structured prompts across ChatGPT, Gemini, and Perplexity to find out what actually drives AI brand recommendations. The answer isn&apos;t ad spend or session data — it&apos;s structural authority built into the model at training time. Most brands aren&apos;t building it.
-            </p>
-            <p className={s.subhead}>
-              This free research report gives CMOs and marketing leaders a clear, data-backed picture of who is winning in AI search — and what you can actually do about it.
-            </p>
-            <ul className={s.bullets}>
-              {bullets.map((b, i) => (
-                <li key={i} className={s.bullet}>
-                  <span className={s.bulletCheck}>✓</span>
-                  <span>{b}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
 
-          {/* RIGHT: FORM */}
-          <div className={s.heroRight}>
-            <div className={s.coverThumb}>
+          {/* LEFT: IMAGE */}
+          <div className={s.heroLeft}>
+            <div className={s.coverImage}>
               <div className={s.coverGradient}>
+                <div className={s.coverBrain}>
+                  {/* Abstract brain/network SVG */}
+                  <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg" className={s.brainSvg}>
+                    <circle cx="150" cy="150" r="140" fill="url(#bg)" opacity="0.3"/>
+                    <circle cx="150" cy="120" r="70" fill="none" stroke="rgba(180,120,255,0.6)" strokeWidth="1.5"/>
+                    <circle cx="150" cy="120" r="50" fill="none" stroke="rgba(180,120,255,0.4)" strokeWidth="1"/>
+                    <circle cx="150" cy="120" r="30" fill="rgba(140,80,255,0.3)"/>
+                    {/* Network nodes */}
+                    {[[80,80],[220,80],[60,150],[240,150],[100,200],[200,200],[150,60],[150,240],[110,110],[190,110],[110,130],[190,130]].map(([cx,cy],i) => (
+                      <circle key={i} cx={cx} cy={cy} r="4" fill="rgba(200,150,255,0.8)"/>
+                    ))}
+                    {/* Network lines */}
+                    <line x1="80" y1="80" x2="150" y2="120" stroke="rgba(180,120,255,0.3)" strokeWidth="1"/>
+                    <line x1="220" y1="80" x2="150" y2="120" stroke="rgba(180,120,255,0.3)" strokeWidth="1"/>
+                    <line x1="60" y1="150" x2="150" y2="120" stroke="rgba(180,120,255,0.3)" strokeWidth="1"/>
+                    <line x1="240" y1="150" x2="150" y2="120" stroke="rgba(180,120,255,0.3)" strokeWidth="1"/>
+                    <line x1="100" y1="200" x2="150" y2="120" stroke="rgba(180,120,255,0.2)" strokeWidth="1"/>
+                    <line x1="200" y1="200" x2="150" y2="120" stroke="rgba(180,120,255,0.2)" strokeWidth="1"/>
+                    <line x1="80" y1="80" x2="220" y2="80" stroke="rgba(180,120,255,0.2)" strokeWidth="1"/>
+                    <line x1="60" y1="150" x2="240" y2="150" stroke="rgba(180,120,255,0.2)" strokeWidth="1"/>
+                    <defs>
+                      <radialGradient id="bg" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stopColor="#9333EA"/>
+                        <stop offset="100%" stopColor="#4C1D95"/>
+                      </radialGradient>
+                    </defs>
+                  </svg>
+                </div>
                 <div className={s.coverLogoText}>AdLi<span>ft</span></div>
-                <div className={s.coverHeading}>WHO&apos;S WINNING<br />IN AI SEARCH</div>
-                <div className={s.coverSub}>LLM Brand Consistency Research · 2026</div>
+                <div className={s.coverHeading}>WHO&apos;S WINNING<br />IN AI SEARCH:</div>
+                <div className={s.coverSubText}>Top Websites Visible in AI Search Across Industries</div>
               </div>
             </div>
+          </div>
+
+          {/* RIGHT: COPY + FORM */}
+          <div className={s.heroRight}>
+            <div className={s.badge}>
+              <span className={s.badgeDot} />
+              2026 RESEARCH REPORT
+            </div>
+            <h1 className={s.h1}>
+              Who&apos;s Winning<br />
+              in <span className={s.h1Orange}>AI Search?</span>
+            </h1>
+            <p className={s.subhead}>
+              We tested ChatGPT, Gemini, and Perplexity to see which brands dominate recommendations. Here&apos;s what actually drives visibility today.
+            </p>
 
             <div className={s.formBox}>
               {submitted ? (
@@ -133,47 +141,6 @@ export default function LandingPage() {
               )}
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* STATS */}
-      <section className={s.statsBar}>
-        <div className={s.statsInner}>
-          {stats.map(st => (
-            <div key={st.num} className={s.statItem}>
-              <span className={s.statNum}>{st.num}</span>
-              <span className={s.statLabel}>{st.label}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* INSIGHT */}
-      <section className={s.insight}>
-        <div className={s.insightInner}>
-          <h2 className={s.insightH2}>
-            Login state doesn&apos;t drive AI recommendations.<br />
-            <span className={s.orange}>Training-time authority does.</span>
-          </h2>
-          <p className={s.insightBody}>
-            Across 1,237 paired observations — logged-in vs. anonymous sessions — the average Overlap Coefficient was 90.4%. Nine out of ten brands recommended to a logged-in user were also recommended to an anonymous one. What determines whether your brand is mentioned has nothing to do with cookies, retargeting, or ad spend. It&apos;s what the model learned at training time — driven by citation depth, content surface area, and third-party validation.
-          </p>
-          <blockquote className={s.quote}>
-            &ldquo;If you want to change what brands an AI recommends, you need to change what the model has learned — not try to optimise for the session.&rdquo;
-            <cite className={s.quoteAttr}>— AdLift LLM Brand Consistency Research, 2026</cite>
-          </blockquote>
-        </div>
-      </section>
-
-      {/* BOTTOM CTA */}
-      <section className={s.bottomCta}>
-        <div className={s.bottomInner}>
-          <h2 className={s.bottomH2}>Your brand is either in the room when a buyer asks AI — or it isn&apos;t.</h2>
-          <p className={s.bottomP}>Find out which side you&apos;re on. Download the free research and see what drives AI brand visibility in your category.</p>
-          <button className={s.bottomBtn} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            DOWNLOAD THE FREE RESEARCH
-          </button>
-          <p className={s.bottomFine}>Free download · No credit card required · PDF delivered to your inbox</p>
         </div>
       </section>
 
