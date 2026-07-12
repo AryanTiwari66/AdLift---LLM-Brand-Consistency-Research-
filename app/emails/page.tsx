@@ -56,23 +56,19 @@ export default function EmailsPage() {
           <div className={s.emailCard}>
             <div className={s.emailMeta}>
               <span className={s.emailStep}>EMAIL 2 · DAY 2</span>
-              <div className={s.emailField}><span className={s.emailFieldKey}>From</span><span className={s.emailFieldVal}>Prashant Puri &lt;prashant@adlift.com&gt;</span></div>
-              <div className={s.emailField}><span className={s.emailFieldKey}>Subject</span><span className={s.emailSubject}>Is AI recommending you — or your competitor?</span></div>
-              <div className={s.emailField}><span className={s.emailFieldKey}>Preview</span><span className={s.emailFieldVal}>The 3 structural factors that decide who gets cited.</span></div>
+              <div className={s.emailField}><span className={s.emailFieldKey}>From</span><span className={s.emailFieldVal}>AdLift &lt;research@adlift.com&gt;</span></div>
+              <div className={s.emailField}><span className={s.emailFieldKey}>Subject</span><span className={s.emailSubject}>Is your marketing energy going to waste?</span></div>
+              <div className={s.emailField}><span className={s.emailFieldKey}>Preview</span><span className={s.emailFieldVal}>Standard Google SEO won&apos;t carry you into AI search.</span></div>
             </div>
             <div className={s.emailBody}>
-              <p>Hi {'{{firstName}}'},</p>
-              <p>Quick follow-up now that you&apos;ve had the report for a day.</p>
-              <p>The finding most marketing leaders miss: AI models don&apos;t &ldquo;rank&rdquo; brands the way Google does. They reconstruct them from <strong>consistency signals</strong> — how uniformly your brand is described across the web.</p>
-              <p>The three factors that moved the needle most in our data:</p>
-              <p>
-                <strong>1. Entity clarity</strong> — a clean, consistent description of who you are.<br />
-                <strong>2. Third-party corroboration</strong> — being described the same way by others.<br />
-                <strong>3. Structured presence</strong> — schema, reviews, and citations models can parse.
-              </p>
-              <p>Section 3 of the report shows exactly how each played out by industry.</p>
-              <p className={s.emailSign}>— Prashant<br />Co-founder, AdLift</p>
-              <div className={s.emailNote}>Goal: teach, establish authority, no pitch yet.</div>
+              <p>Hi {'{{First Name}}'},</p>
+              <p>Is your team actually optimization-proofing your brand for AEO? Or is all that marketing energy going to waste?</p>
+              <p>Most growth teams assume standard Google SEO will carry them over to AI search engines. It won&apos;t. If your brand data is even slightly fragmented, ChatGPT, Gemini, and AI Overviews will either pull outdated info or ignore you entirely.</p>
+              <p>Our team did the heavy lifting for you and benchmarked who is actually winning across major sectors.</p>
+              <p>Pass this link to your marketing team so they understand exactly why SEO isn&apos;t enough anymore, how LLMs actually work, and who is leading the market right now:</p>
+              <p><a className={s.emailBtn} href="#">Read AdLift&apos;s AI Search Benchmark Report →</a></p>
+              <p className={s.emailSign}>Best,<br />{'{{Your Name}}'}</p>
+              <div className={s.emailNote}>Goal: challenge the SEO-is-enough assumption, position the benchmark, drive a team-wide read.</div>
             </div>
           </div>
 
